@@ -1,0 +1,138 @@
+.woocompat-auditor {
+	max-width: 1180px;
+}
+
+.woocompat-auditor__header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 24px;
+	margin: 24px 0;
+}
+
+.woocompat-auditor__header h1 {
+	margin-bottom: 8px;
+}
+
+.woocompat-auditor__header p {
+	max-width: 720px;
+	margin: 0;
+	color: #50575e;
+}
+
+.woocompat-auditor__actions {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.woocompat-auditor__summary {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 12px;
+	margin-bottom: 18px;
+}
+
+.woocompat-auditor__summary-card,
+.woocompat-auditor__result {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 10px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.woocompat-auditor__summary-card {
+	padding: 16px;
+}
+
+.woocompat-auditor__summary-card strong {
+	display: block;
+	font-size: 28px;
+	line-height: 1;
+	margin-bottom: 6px;
+}
+
+.woocompat-auditor__summary-card span {
+	color: #50575e;
+}
+
+.woocompat-auditor__grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.woocompat-auditor__result {
+	padding: 18px;
+	border-inline-start-width: 4px;
+}
+
+.woocompat-auditor__result.is-pass {
+	border-inline-start-color: #00a32a;
+}
+
+.woocompat-auditor__result.is-warning {
+	border-inline-start-color: #dba617;
+}
+
+.woocompat-auditor__result.is-fail {
+	border-inline-start-color: #d63638;
+}
+
+.woocompat-auditor__result.is-info {
+	border-inline-start-color: #2271b1;
+}
+
+.woocompat-auditor__result-topline {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.woocompat-auditor__result h2 {
+	font-size: 15px;
+	margin: 0;
+}
+
+.woocompat-auditor__result p {
+	margin: 12px 0 0;
+	color: #3c434a;
+}
+
+.woocompat-auditor__badge {
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	background: #f0f0f1;
+	border-radius: 999px;
+	padding: 4px 8px;
+}
+
+.woocompat-auditor details {
+	margin-top: 14px;
+}
+
+.woocompat-auditor pre {
+	overflow: auto;
+	max-height: 320px;
+	padding: 12px;
+	background: #f6f7f7;
+	border-radius: 6px;
+}
+
+.woocompat-auditor__footer-note {
+	color: #646970;
+	margin-top: 18px;
+}
+
+@media (max-width: 782px) {
+	.woocompat-auditor__header {
+		flex-direction: column;
+	}
+
+	.woocompat-auditor__summary,
+	.woocompat-auditor__grid {
+		grid-template-columns: 1fr;
+	}
+}
