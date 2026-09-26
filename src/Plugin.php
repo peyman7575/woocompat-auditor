@@ -12,6 +12,9 @@ use WooCompatAuditor\Admin\ExportController;
 use WooCompatAuditor\Audit\AuditRunner;
 use WooCompatAuditor\Cli\AuditCommand;
 
+/**
+ * Coordinates plugin services and runtime hooks.
+ */
 final class Plugin {
 	/**
 	 * Singleton instance.
