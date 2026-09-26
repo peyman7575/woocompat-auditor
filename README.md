@@ -7,11 +7,11 @@
 
 It turns common pre-release and troubleshooting checks into a repeatable report that can be reviewed in wp-admin, exported as JSON, or generated with WP-CLI.
 
-> Status: early development (\`0.1.0\`). The project is usable, while the audit catalog and automated test coverage are intentionally still growing.
+> Status: early development (`0.1.x`). The project is usable today, while the audit catalog and integration coverage are intentionally still growing.
 
 ## Why this project exists
 
-WooCommerce stores combine WordPress core, WooCommerce, extensions, themes, template overrides, background jobs, order-storage modes, and server configuration. Compatibility issues often surface only after one of those layers changes.
+WooCommerce stores combine WordPress core, WooCommerce, extensions, themes, template overrides, background jobs, order-storage modes, and server configuration. Compatibility problems often surface only after one of those layers changes.
 
 WooCompat Auditor provides a neutral diagnostic snapshot. It does **not** modify site configuration and it does **not** claim that every warning is a defect.
 
@@ -26,7 +26,7 @@ WooCompat Auditor provides a neutral diagnostic snapshot. It does **not** modify
 - WordPress memory limit
 - HTTPS on the current request
 - Persistent object cache status
-- Theme-level WooCommerce template overrides, including outdated \`@version\` headers
+- Theme-level WooCommerce template overrides, including outdated `@version` headers
 
 ## Interfaces
 
@@ -42,27 +42,29 @@ The screen provides a status summary, technical context for each check, and a JS
 
 ### WP-CLI
 
-\`\`\`bash
+```bash
 wp woocompat audit
 wp woocompat audit --format=json
-\`\`\`
+```
 
 ## Installation
 
-1. Download or clone the repository.
-2. Place it at \`wp-content/plugins/woocompat-auditor\`.
+1. Download a release ZIP or clone the repository.
+2. Place the plugin at `wp-content/plugins/woocompat-auditor`.
 3. Activate **WooCompat Auditor**.
 4. Open **WooCommerce → Compatibility Auditor**.
 
 Development clone:
 
-\`\`\`bash
+```bash
 git clone https://github.com/peyman7575/woocompat-auditor.git
-\`\`\`
+cd woocompat-auditor
+composer install
+```
 
 ## Privacy and safety
 
-WooCompat Auditor is read-only in \`0.1.x\`.
+WooCompat Auditor is read-only in the `0.1.x` release line.
 
 - It does not change WooCommerce settings.
 - It does not submit reports to an external service.
@@ -79,18 +81,41 @@ Before publishing an exported report, review it like any other diagnostic artifa
 
 ## Development
 
-PHP syntax check:
+Run the complete local quality gate:
 
-\`\`\`bash
-find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l
-\`\`\`
-
-Install optional development tooling:
-
-\`\`\`bash
+```bash
 composer install
+composer check
+```
+
+Or run checks separately:
+
+```bash
 composer lint
-\`\`\`
+composer test
+composer verify-version
+```
+
+The repository CI validates PHP syntax across PHP 7.4–8.4, runs PHPUnit across representative supported PHP versions, enforces WordPress Coding Standards, validates package metadata, and smoke-tests an installable plugin ZIP.
+
+## Build an installable ZIP
+
+```bash
+bash scripts/build-zip.sh
+```
+
+The package is written to `dist/` with a single `woocompat-auditor/` root directory and excludes development-only files.
+
+## Release process
+
+Release automation is tag-driven:
+
+1. Update the plugin header version, `WOOCOMPAT_AUDITOR_VERSION`, `readme.txt` stable tag, and changelog.
+2. Run `composer check`.
+3. Tag the release as `vX.Y.Z`.
+4. GitHub Actions builds the installable ZIP and creates the GitHub Release for that tag.
+
+Version metadata is checked automatically to prevent mismatched release packages.
 
 ## Roadmap
 
@@ -98,7 +123,7 @@ Near-term work includes:
 
 - broader plugin compatibility declarations and feature detection
 - safer, richer template override diagnostics
-- automated WordPress/WooCommerce integration tests
+- WordPress/WooCommerce integration tests
 - machine-readable check metadata for CI pipelines
 - optional redacted support bundles
 - extensibility API for third-party checks
