@@ -3,7 +3,7 @@ Contributors: peyman7575
 Tags: woocommerce, compatibility, diagnostics, hpos, developer-tools
 Requires at least: 6.6
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,7 +13,7 @@ Developer-focused, read-only compatibility and production-readiness auditing for
 
 WooCompat Auditor provides a repeatable diagnostic snapshot for WooCommerce developers and maintainers.
 
-Version 0.1.0 checks the WordPress/PHP environment, WooCommerce runtime availability, HPOS status, Action Scheduler, debug configuration, memory limits, HTTPS, persistent object cache usage, and WooCommerce template overrides.
+Version 0.2.0 checks the WordPress/PHP environment, WooCommerce runtime availability, HPOS status, extension compatibility declarations for HPOS and Cart/Checkout Blocks, Action Scheduler, debug configuration, memory limits, HTTPS, persistent object cache usage, and WooCommerce template overrides.
 
 Reports are available in wp-admin, as a local JSON download, and through WP-CLI.
 
@@ -26,6 +26,12 @@ The plugin is read-only and does not automatically change store configuration.
 3. Open WooCommerce > Compatibility Auditor.
 
 == Changelog ==
+
+= 0.2.0 =
+* Added active WooCommerce extension compatibility declaration auditing for HPOS and Cart/Checkout Blocks.
+* Added PHPUnit coverage and CI quality gates across supported PHP versions.
+* Added reproducible installable ZIP builds and tag-driven release automation.
+* Added version consistency checks and stronger contributor/release documentation.
 
 = 0.1.0 =
 * Initial public release.
