@@ -6,6 +6,8 @@ The project follows semantic versioning while the public API is developed.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-27
+
 ### Added
 
 - Active WooCommerce extension compatibility declaration auditing for HPOS and Cart/Checkout Blocks.
