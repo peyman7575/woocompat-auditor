@@ -8,6 +8,7 @@ The project follows semantic versioning while the public API is developed.
 
 ### Added
 
+- Active WooCommerce extension compatibility declaration auditing for HPOS and Cart/Checkout Blocks.
 - PHPUnit unit-test foundation for audit result and audit report behavior.
 - CI quality gates across supported PHP versions.
 - Installable ZIP build script and tag-driven release workflow.
