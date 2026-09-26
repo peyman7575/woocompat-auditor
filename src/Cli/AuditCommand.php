@@ -9,6 +9,9 @@ namespace WooCompatAuditor\Cli;
 
 use WooCompatAuditor\Audit\AuditRunner;
 
+/**
+ * Registers the read-only WooCompat audit command for WP-CLI.
+ */
 final class AuditCommand {
 	/**
 	 * Register the command.
