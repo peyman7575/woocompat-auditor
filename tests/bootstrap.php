@@ -6,7 +6,7 @@
  */
 
 if ( ! defined( 'WOOCOMPAT_AUDITOR_VERSION' ) ) {
-	define( 'WOOCOMPAT_AUDITOR_VERSION', '0.1.0' );
+	define( 'WOOCOMPAT_AUDITOR_VERSION', '0.2.0' );
 }
 
 if ( ! defined( 'WOOCOMPAT_AUDITOR_PATH' ) ) {
