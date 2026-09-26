@@ -12,6 +12,9 @@ use WooCompatAuditor\Audit\Checks\HposCheck;
 use WooCompatAuditor\Audit\Checks\TemplateOverridesCheck;
 use WooCompatAuditor\Audit\Checks\WooCommerceCheck;
 
+/**
+ * Runs the audit catalog and builds the normalized report contract.
+ */
 final class AuditRunner {
 	/**
 	 * Run all checks.
