@@ -9,6 +9,9 @@ namespace WooCompatAuditor\Audit\Checks;
 
 use WooCompatAuditor\Audit\AuditResult;
 
+/**
+ * Audits WooCommerce availability and core runtime services.
+ */
 final class WooCommerceCheck {
 	/**
 	 * Run checks.
