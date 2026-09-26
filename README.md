@@ -20,6 +20,7 @@ WooCompat Auditor provides a neutral diagnostic snapshot. It does **not** modify
 - PHP and WordPress baseline versions
 - WooCommerce availability and version
 - High-Performance Order Storage (HPOS) status
+- Active WooCommerce extension declarations for HPOS and Cart/Checkout Blocks, distinguishing explicit incompatibility from missing declarations
 - Action Scheduler availability
 - WooCommerce session initialization context
 - Production debug configuration
@@ -121,7 +122,7 @@ Version metadata is checked automatically to prevent mismatched release packages
 
 Near-term work includes:
 
-- broader plugin compatibility declarations and feature detection
+- broader WooCommerce feature coverage beyond HPOS and Cart/Checkout Blocks
 - safer, richer template override diagnostics
 - WordPress/WooCommerce integration tests
 - machine-readable check metadata for CI pipelines
