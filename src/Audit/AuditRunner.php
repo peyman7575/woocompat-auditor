@@ -9,6 +9,7 @@ namespace WooCompatAuditor\Audit;
 
 use WooCompatAuditor\Audit\Checks\EnvironmentCheck;
 use WooCompatAuditor\Audit\Checks\HposCheck;
+use WooCompatAuditor\Audit\Checks\PluginFeatureCompatibilityCheck;
 use WooCompatAuditor\Audit\Checks\TemplateOverridesCheck;
 use WooCompatAuditor\Audit\Checks\WooCommerceCheck;
 
