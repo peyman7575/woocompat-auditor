@@ -9,6 +9,9 @@ namespace WooCompatAuditor\Audit\Checks;
 
 use WooCompatAuditor\Audit\AuditResult;
 
+/**
+ * Detects High-Performance Order Storage availability and usage.
+ */
 final class HposCheck {
 	/**
 	 * Run checks.

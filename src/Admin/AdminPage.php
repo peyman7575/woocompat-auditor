@@ -9,11 +9,22 @@ namespace WooCompatAuditor\Admin;
 
 use WooCompatAuditor\Audit\AuditRunner;
 
+/**
+ * Registers and renders the WooCompat Auditor admin report screen.
+ */
 final class AdminPage {
-	/** @var AuditRunner */
+	/**
+	 * Audit runner used to build the report.
+	 *
+	 * @var AuditRunner
+	 */
 	private $runner;
 
-	/** @var string */
+	/**
+	 * Registered WordPress admin page hook suffix.
+	 *
+	 * @var string
+	 */
 	private $hook_suffix = '';
 
 	/**

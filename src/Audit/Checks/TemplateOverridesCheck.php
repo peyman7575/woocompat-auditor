@@ -12,6 +12,9 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use WooCompatAuditor\Audit\AuditResult;
 
+/**
+ * Audits theme-level WooCommerce template overrides against core template versions.
+ */
 final class TemplateOverridesCheck {
 	/**
 	 * Run checks.

@@ -7,25 +7,48 @@
 
 namespace WooCompatAuditor\Audit;
 
+/**
+ * Immutable-style value object for one machine-readable audit result.
+ */
 final class AuditResult {
 	const PASS    = 'pass';
 	const WARNING = 'warning';
 	const FAIL    = 'fail';
 	const INFO    = 'info';
 
-	/** @var string */
+	/**
+	 * Stable machine-readable result identifier.
+	 *
+	 * @var string
+	 */
 	private $id;
 
-	/** @var string */
+	/**
+	 * Human-readable result label.
+	 *
+	 * @var string
+	 */
 	private $label;
 
-	/** @var string */
+	/**
+	 * Normalized result status.
+	 *
+	 * @var string
+	 */
 	private $status;
 
-	/** @var string */
+	/**
+	 * Human-readable result message.
+	 *
+	 * @var string
+	 */
 	private $message;
 
-	/** @var array<string,mixed> */
+	/**
+	 * Minimal diagnostic context safe for exports.
+	 *
+	 * @var array<string,mixed>
+	 */
 	private $context;
 
 	/**

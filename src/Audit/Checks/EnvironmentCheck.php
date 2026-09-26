@@ -9,6 +9,9 @@ namespace WooCompatAuditor\Audit\Checks;
 
 use WooCompatAuditor\Audit\AuditResult;
 
+/**
+ * Audits baseline PHP, WordPress, debugging, memory, HTTPS, and cache signals.
+ */
 final class EnvironmentCheck {
 	/**
 	 * Run checks.

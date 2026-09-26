@@ -6,7 +6,19 @@
 	<exclude-pattern>vendor/*</exclude-pattern>
 	<arg name="extensions" value="php"/>
 	<arg name="colors"/>
-	<rule ref="WordPress-Core"/>
+
+	<rule ref="WordPress-Core">
+		<!-- Source classes use PSR-4 file names to match the project autoloader. -->
+		<exclude name="WordPress.Files.FileName"/>
+	</rule>
 	<rule ref="WordPress-Docs"/>
 	<rule ref="WordPress-Extra"/>
+
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="manage_woocommerce"/>
+			</property>
+		</properties>
+	</rule>
 </ruleset>
