@@ -109,12 +109,15 @@ The package is written to `dist/` with a single `woocompat-auditor/` root direct
 
 ## Release process
 
-Release automation is tag-driven:
+The recommended release flow is PR-driven:
 
-1. Update the plugin header version, `WOOCOMPAT_AUDITOR_VERSION`, `readme.txt` stable tag, and changelog.
-2. Run `composer check`.
-3. Tag the release as `vX.Y.Z`.
-4. GitHub Actions builds the installable ZIP and creates the GitHub Release for that tag.
+1. Create a branch named `release/X.Y.Z`.
+2. Update the plugin header version, `WOOCOMPAT_AUDITOR_VERSION`, `readme.txt` stable tag, changelog, and optional `docs/releases/X.Y.Z.md` release notes.
+3. Run `composer check` and open a pull request.
+4. Merge the release PR only after CI is green.
+5. The Release workflow re-runs the quality gate, builds the installable ZIP, creates `vX.Y.Z` when needed, and publishes the GitHub Release.
+
+A manually pushed `vX.Y.Z` tag is also supported. The workflow verifies that the tag matches the plugin version before publishing.
 
 Version metadata is checked automatically to prevent mismatched release packages.
 
