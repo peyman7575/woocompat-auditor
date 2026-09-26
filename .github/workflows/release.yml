@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  pull_request:
+    types: [closed]
   workflow_dispatch:
 
 permissions:
@@ -11,33 +13,101 @@ permissions:
 
 jobs:
   release:
-    name: Validate and package release
+    name: Validate, package and publish release
+    if: >-
+      github.event_name != 'pull_request' ||
+      (
+        github.event.pull_request.merged == true &&
+        startsWith(github.event.pull_request.head.ref, 'release/') &&
+        github.event.pull_request.head.repo.full_name == github.repository
+      )
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           coverage: none
           tools: composer:v2
+
       - name: Install development dependencies
         run: composer install --no-interaction --prefer-dist --no-progress
+
       - name: Run quality gate
         run: composer check
+
       - name: Build installable ZIP
         run: bash scripts/build-zip.sh
-      - name: Upload package artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: woocompat-auditor-package
-          path: dist/*.zip
-          if-no-files-found: error
-      - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
+
+      - name: Resolve release metadata
+        id: release_meta
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" dist/*.zip \
-            --verify-tag \
-            --generate-notes \
-            --title "WooCompat Auditor ${GITHUB_REF_NAME#v}"
+          VERSION="$(php -r '
+            $contents = file_get_contents("woocompat-auditor.php");
+            if (!preg_match("/^ \\* Version:\\s*(\\S+)/m", $contents, $matches)) {
+                fwrite(STDERR, "Plugin version not found.\n");
+                exit(1);
+            }
+            echo $matches[1];
+          ')"
+          TAG="v${VERSION}"
+
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            REQUESTED_TAG="${GITHUB_REF#refs/tags/}"
+            if [[ "${REQUESTED_TAG}" != "${TAG}" ]]; then
+              echo "Tag ${REQUESTED_TAG} does not match plugin version ${VERSION}." >&2
+              exit 1
+            fi
+          fi
+
+          echo "version=${VERSION}" >> "${GITHUB_OUTPUT}"
+          echo "tag=${TAG}" >> "${GITHUB_OUTPUT}"
+
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            echo "release_exists=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "release_exists=false" >> "${GITHUB_OUTPUT}"
+          fi
+
+          if git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1; then
+            echo "tag_exists=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "tag_exists=false" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: woocompat-auditor-${{ steps.release_meta.outputs.version }}
+          path: dist/*.zip
+          if-no-files-found: error
+
+      - name: Create GitHub Release
+        if: steps.release_meta.outputs.release_exists != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ steps.release_meta.outputs.tag }}
+          RELEASE_VERSION: ${{ steps.release_meta.outputs.version }}
+          TAG_EXISTS: ${{ steps.release_meta.outputs.tag_exists }}
+        run: |
+          NOTES_FILE="docs/releases/${RELEASE_VERSION}.md"
+
+          if [[ -f "${NOTES_FILE}" ]]; then
+            NOTES_ARGS=(--notes-file "${NOTES_FILE}")
+          else
+            NOTES_ARGS=(--generate-notes)
+          fi
+
+          if [[ "${TAG_EXISTS}" == "true" ]]; then
+            TARGET_ARGS=(--verify-tag)
+          else
+            TARGET_ARGS=(--target "${GITHUB_SHA}")
+          fi
+
+          gh release create "${RELEASE_TAG}" dist/*.zip \
+            "${TARGET_ARGS[@]}" \
+            "${NOTES_ARGS[@]}" \
+            --title "WooCompat Auditor ${RELEASE_VERSION}"
