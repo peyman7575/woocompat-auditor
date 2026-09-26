@@ -193,7 +193,7 @@ final class PluginFeatureCompatibilityCheck {
 				continue;
 			}
 
-			$declared_compatible = $this->normalize_plugin_ids(
+			$declared_compatible   = $this->normalize_plugin_ids(
 				isset( $declarations['compatible'] ) ? $declarations['compatible'] : array()
 			);
 			$declared_incompatible = $this->normalize_plugin_ids(
