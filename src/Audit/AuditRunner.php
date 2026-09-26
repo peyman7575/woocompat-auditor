@@ -26,6 +26,7 @@ final class AuditRunner {
 			new EnvironmentCheck(),
 			new WooCommerceCheck(),
 			new HposCheck(),
+			new PluginFeatureCompatibilityCheck(),
 			new TemplateOverridesCheck(),
 		);
 
