@@ -7,7 +7,7 @@
 
 It turns common pre-release and troubleshooting checks into a repeatable report that can be reviewed in wp-admin, exported as JSON, or generated with WP-CLI.
 
-> Status: early development (`0.1.x`). The project is usable today, while the audit catalog and integration coverage are intentionally still growing.
+> Status: early development (`0.2.x`). The project is usable today, while the audit catalog and integration coverage are intentionally still growing.
 
 ## Why this project exists
 
@@ -65,7 +65,7 @@ composer install
 
 ## Privacy and safety
 
-WooCompat Auditor is read-only in the `0.1.x` release line.
+WooCompat Auditor is read-only in the `0.2.x` release line.
 
 - It does not change WooCommerce settings.
 - It does not submit reports to an external service.

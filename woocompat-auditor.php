@@ -3,7 +3,7 @@
  * Plugin Name:       WooCompat Auditor
  * Plugin URI:        https://github.com/peyman7575/woocompat-auditor
  * Description:       Developer-focused compatibility and production-readiness auditing for WooCommerce sites.
- * Version:           0.1.0
+ * Version:           0.2.0
  * Requires at least: 6.6
  * Requires PHP:      7.4
  * Author:            Peyman
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'WOOCOMPAT_AUDITOR_VERSION', '0.1.0' );
+define( 'WOOCOMPAT_AUDITOR_VERSION', '0.2.0' );
 define( 'WOOCOMPAT_AUDITOR_FILE', __FILE__ );
 define( 'WOOCOMPAT_AUDITOR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOOCOMPAT_AUDITOR_URL', plugin_dir_url( __FILE__ ) );
