@@ -9,8 +9,15 @@ namespace WooCompatAuditor\Admin;
 
 use WooCompatAuditor\Audit\AuditRunner;
 
+/**
+ * Handles authorized, nonce-protected local JSON report downloads.
+ */
 final class ExportController {
-	/** @var AuditRunner */
+	/**
+	 * Audit runner used to generate export data.
+	 *
+	 * @var AuditRunner
+	 */
 	private $runner;
 
 	/**
